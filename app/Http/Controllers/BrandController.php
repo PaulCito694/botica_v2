@@ -74,7 +74,10 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+      Brand::where('id',$request->id)->update([
+        'name' => $request->name,
+        'description' => $request->description
+      ]);
     }
 
     /**
@@ -85,6 +88,6 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+      $brand->delete();
     }
 }

@@ -33,6 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin')->group(functio
     Route::get('/productos', function () {
         return Inertia::render('Products');
     })->name('productos');
+
     Route::resources([
       'brands' => BrandController::class
     ]);
