@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use mysql_xdevapi\Exception;
 
 class BrandController extends Controller
 {
@@ -37,10 +38,16 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+      try {
         Brand::create([
           'name' => $request->name,
           'description' => $request->description
         ]);
+        return response('Creado correctamente', 200);
+      }
+      catch (\Exception $e) {
+        return response('Hubo un error creando el registro', 500);
+      }
     }
 
     /**

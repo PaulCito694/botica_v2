@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LaboratoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,8 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin')->group(functio
     })->name('productos');
 
     Route::resources([
-      'brands' => BrandController::class
+      'brands' => BrandController::class,
+      'categories' => CategoryController::class,
+      'laboratories' => LaboratoryController::class,
     ]);
 });
