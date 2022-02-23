@@ -14,11 +14,11 @@ class CreateLaboratoriesTable extends Migration
     public function up()
     {
         Schema::create('laboratories', function (Blueprint $table) {
-            $table->id();
+          $table->id();
           $table->string('name');
           $table->string('description')->nullable();
           $table->softDeletes();
-            $table->timestamps();
+          $table->timestamps();
         });
     }
 

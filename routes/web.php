@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LaboratoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,5 +41,6 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin')->group(functio
       'brands' => BrandController::class,
       'categories' => CategoryController::class,
       'laboratories' => LaboratoryController::class,
+      'products' => ProductController::class,
     ]);
 });
