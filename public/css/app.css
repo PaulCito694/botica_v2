@@ -969,6 +969,12 @@ select {
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
+.m-0 {
+  margin: 0px;
+}
+.\!m-0 {
+  margin: 0px !important;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1044,6 +1050,12 @@ select {
 }
 .-mt-px {
   margin-top: -1px;
+}
+.\!ml-2 {
+  margin-left: 0.5rem !important;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 .block {
   display: block;
@@ -1402,6 +1414,10 @@ select {
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+.bg-slate-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;

@@ -1,5 +1,5 @@
 import React from "react";
-import Crud from "./Crud";
+import Crud from "./components/Crud";
 
 const Categories = ({setOpenCategoryModal}:any) => {
   return (

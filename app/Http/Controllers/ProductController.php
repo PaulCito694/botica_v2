@@ -86,7 +86,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
-        //
+        product::where('id',$request->id)->update([
+          'name' => $request->name,
+          'components' => $request->components,
+          'location' => $request->location,
+          'description' => $request->description,
+          'price_out' => $request->price_out,
+          'price_in' => $request->price_in,
+          'category_id' => $request->category_id,
+          'laboratory_id' => $request->laboratory_id,
+          'brand_id' => $request->brand_id,
+      ]);
     }
 
     /**
@@ -97,6 +107,6 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
-        //
+      $product->delete();
     }
 }

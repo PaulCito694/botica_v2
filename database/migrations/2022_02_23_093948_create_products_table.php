@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
           $table->string('components')->nullable();
           $table->string('location')->nullable();
           $table->string('description')->nullable();
-          $table->string('price_out');
-          $table->string('price_in');
+          $table->float('price_out');
+          $table->float('price_in');
           $table->unsignedBigInteger('category_id');
           $table->unsignedBigInteger('laboratory_id');
           $table->unsignedBigInteger('brand_id');

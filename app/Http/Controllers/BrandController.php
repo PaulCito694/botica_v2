@@ -39,14 +39,14 @@ class BrandController extends Controller
     public function store(Request $request)
     {
       try {
-        Brand::create([
+        $brand = Brand::create([
           'name' => $request->name,
           'description' => $request->description
         ]);
-        return response('Creado correctamente', 200);
+        return response($brand, 200);
       }
       catch (\Exception $e) {
-        return response('Hubo un error creando el registro', 500);
+        return response($e, 500);
       }
     }
 
