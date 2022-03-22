@@ -14,7 +14,7 @@ interface Values {
   addButtonClick?:any
 }
 
-const AutoCompleteField = ({name, label, className, validate, data, addButtonClick}:Values) =>{
+const AutoCompleteField = ({name, label, className, validate, data = [], addButtonClick}:Values) =>{
   const [value, setValue] = useState(null)
   const {input, meta: {error, touched}} = useField(name,{validate})
   const {createMutate, createStatus} = useCrud('brands')
@@ -27,6 +27,8 @@ const AutoCompleteField = ({name, label, className, validate, data, addButtonCli
   }
   useEffect(()=>setValue(options.find(((val: { id: any; })=>val.id === input.value)))
   , [input.value])
+
+  if(data === undefined) return null
 
   return <div className='grid'>
     <label>
