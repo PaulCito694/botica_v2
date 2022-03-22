@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $products = product::all();
+      $products = product::with(['brand:id,name', 'category:id,name', 'laboratory:id,name'])->get();
       return response($products->toJson());
     }
 
@@ -37,17 +37,18 @@ class ProductController extends Controller
     public function store(Request $request)
     {
       try {
-        product::create([
+        $product =  product::create([
           'name' => $request->name,
           'components' => $request->components,
           'location' => $request->location,
           'description' => $request->description,
-          'price_out' => $request->price_out,
-          'price_in' => $request->price_in,
+          'wholesale_price' => $request->wholesale_price,
+          'retail_price' => $request->retail_price,
           'category_id' => $request->category_id,
           'laboratory_id' => $request->laboratory_id,
           'brand_id' => $request->brand_id,
         ]);
+        var_dump($product);
         return response('Creado correctamente', 200);
       }
       catch (\Exception $e) {
@@ -91,8 +92,8 @@ class ProductController extends Controller
           'components' => $request->components,
           'location' => $request->location,
           'description' => $request->description,
-          'price_out' => $request->price_out,
-          'price_in' => $request->price_in,
+          'wholesale_price' => $request->wholesale_price,
+          'retail_price' => $request->retail_price,
           'category_id' => $request->category_id,
           'laboratory_id' => $request->laboratory_id,
           'brand_id' => $request->brand_id,

@@ -44,12 +44,8 @@ const CustomMaterialMenu = ({ row, onDeleteRow, size, onUpdateRow }:any) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem>Ver</MenuItem>
-
         <MenuItem onClick={updateRow}>Editar</MenuItem>
-
         <Divider />
-
         <MenuItem onClick={deleteRow}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" color="secondary" />

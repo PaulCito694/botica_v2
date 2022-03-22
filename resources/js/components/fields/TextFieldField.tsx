@@ -14,7 +14,7 @@ const TextFieldField = ({name, label, className, validate, ...props}:Values) =>{
   return <div className='grid'>
     <label>{label}</label>
     <TextField className={className} {...input} {...props}/>
-    {touched && error}
+    {touched && <span className='text-red-500'>{error}</span>}
   </div>
 }
 

@@ -177,6 +177,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
       Venturecraft\Revisionable\RevisionableServiceProvider::class,
+      Amamarul\Hashids\HashidsServiceProvider::class,
 
     ],
 

@@ -11,4 +11,9 @@ class laboratory extends Model
     use HasFactory;
   use SoftDeletes;
   protected $fillable = ['name', 'description'];
+
+  public function products()
+  {
+    return $this->hasMany(product::class);
+  }
 }

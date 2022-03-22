@@ -969,9 +969,6 @@ select {
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
-.m-0 {
-  margin: 0px;
-}
 .\!m-0 {
   margin: 0px !important;
 }
@@ -1054,8 +1051,11 @@ select {
 .\!ml-2 {
   margin-left: 0.5rem !important;
 }
-.mb-5 {
-  margin-bottom: 1.25rem;
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.\!mb-2 {
+  margin-bottom: 0.5rem !important;
 }
 .block {
   display: block;

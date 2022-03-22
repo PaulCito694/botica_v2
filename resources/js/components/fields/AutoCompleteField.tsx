@@ -35,7 +35,7 @@ const AutoCompleteField = ({name, label, className, validate, data, addButtonCli
         onClick={() => addButtonClick(true)}
         endIcon={<Add/>}
         classes={{endIcon:'!m-0'}}
-        className='!ml-2'
+        className='!ml-2 !mb-2'
       />}
     </label>
     <CreatableSelect
@@ -52,7 +52,7 @@ const AutoCompleteField = ({name, label, className, validate, data, addButtonCli
       getOptionValue={item => item.id}
       formatCreateLabel={inputValue => `Crear ${inputValue}`}
     />
-    {touched && error}
+    {touched && <span className='text-red-500'>{error}</span>}
   </div>
 }
 

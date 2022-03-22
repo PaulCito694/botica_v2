@@ -2,7 +2,7 @@ import Add from "@mui/icons-material/Add";
 import React from "react";
 import {Button as MaterialButton} from "@mui/material";
 
-const Button = ({onClick, label, endIcon, type='button', classes, className}:any) =>{
+const Button = ({onClick, label, endIcon, type='button', classes, className, color='primary'}:any) =>{
   return(
     <MaterialButton
       variant='contained'
@@ -11,6 +11,7 @@ const Button = ({onClick, label, endIcon, type='button', classes, className}:any
       type={type}
       classes={classes}
       className={className}
+      color={color}
     >
       {label}
     </MaterialButton>

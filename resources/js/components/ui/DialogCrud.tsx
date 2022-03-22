@@ -52,7 +52,7 @@ const DialogCrud = ({
           description: brand?brand.description:null,
           id: brand?brand.id:null
         }}
-        render={({handleSubmit, form: {reset},submitSucceeded,submitFailed}): any => (
+        render={({handleSubmit, form: {restart},submitSucceeded,submitFailed}): any => (
           <>
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-4 mb-4">
@@ -61,13 +61,13 @@ const DialogCrud = ({
               </div>
               <div className='flex justify-center gap-4'>
                 <Button type="submit" variant='contained'>Guardar</Button>
-                <Button variant='outlined' onClick={reset}>Cancelar</Button>
+                <Button variant='outlined' onClick={restart}>Cancelar</Button>
               </div>
               <Snackbar
                 open={submitSucceeded}
                 autoHideDuration={3000}
                 anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-                onClose={()=> reset()}
+                onClose={restart}
               >
                 <Alert severity='success'>Creado correctamente</Alert>
               </Snackbar>
@@ -75,7 +75,6 @@ const DialogCrud = ({
                 open={submitFailed}
                 autoHideDuration={3000}
                 anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-                onClose={()=> reset()}
               >
                 <Alert severity='error'>Ocurrio un error con la ultima accion</Alert>
               </Snackbar>

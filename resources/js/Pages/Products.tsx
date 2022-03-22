@@ -1,16 +1,18 @@
-import React, {useState} from 'react';
-import AppLayout from '@/Layouts/AppLayout';
-import Brands from "../components/Brands";
-import Categories from "../components/Categories";
-import Laboratories from "../components/Laboratories";
-import {Form} from "react-final-form"
-import TextFieldField from "../components/fields/TextFieldField";
-import AutoCompleteField from "../components/fields/AutoCompleteField";
-import useCrud from "../Hooks/useCrud";
-import DataTable from "../components/components/DataTable";
-import CustomMaterialMenu from "../components/ui/CustomMaterialMenu";
-import Button from "../components/fields/Button";
-import Add from "@mui/icons-material/Add";
+import React, {useState} from 'react'
+import AppLayout from '@/Layouts/AppLayout'
+import Brands from "../components/Brands"
+import Categories from "../components/Categories"
+import Laboratories from "../components/Laboratories"
+import {Form} from "react-final-form
+import TextFieldField from "../components/fields/TextFieldField"
+import AutoCompleteField from "../components/fields/AutoCompleteField"
+import useCrud from "../Hooks/useCrud"
+import DataTable from "../components/components/DataTable"
+import CustomMaterialMenu from "../components/ui/CustomMaterialMenu"
+import Button from "../components/fields/Button"
+import Add from "@mui/icons-material/Add"
+import {Alert, Snackbar} from "@mui/material"
+import {mix, required, isNumber } from "../components/Validations"
 
 const filterFunction = (item:any, filterText: string) => {
   const names =  item.name?.toLowerCase().includes(filterText.toLowerCase())
@@ -29,35 +31,41 @@ export default function Dashboard() {
   const {data: products, status, deleteMutate, updateMutate, createMutate} = useCrud('products')
 
   const columns = [
-    {name: 'Nombre', selector: (row: any) => row.name,},
-    {name: 'Ubicacion', selector: (row: any) => row.location,},
-    {name: 'Componentes', selector: (row: any) => row.components,},
-    {name: 'Precio de compra', selector: (row: any) => row.price_in,},
-    {name: 'Precio de venta', selector: (row: any) => row.price_out,},
+    {name: 'Nombre', selector: (row: any) => row.name, width: '300px',},
+    {name: 'Codigo', selector: (row: any) => row.code, width: '100px',},
+    {name: 'Ubicacion', selector: (row: any) => row.location, width: '100px',},
+    {name: 'Componentes', selector: (row: any) => row.components, width: '300px',},
+    {name: 'Por Mayor', selector: (row: any) => row.wholesale_price, width: '100px',},
+    {name: 'Por Menor', selector: (row: any) => row.retail_price, width: '100px',},
+    {name: 'Laboratorio', selector: (row: any) => row.laboratory?.name, width: '200px',},
+    {name: 'Categoria', selector: (row: any) => row.category?.name, width: '200px',},
+    {name: 'Marca', selector: (row: any) => row.brand?.name, width: '200px',},
     {
       name: 'Opciones',
       cell: (row:any) => <CustomMaterialMenu
         size="small"
         row={row}
-        onDeleteRow={deleteMutate}
+        onDeleteRow={(id:any) => {
+          if (confirm("Seguro que deseas eliminar el registro?"))
+            deleteMutate(id)
+        }}
         onUpdateRow={onUpdate}
       />,
       allowOverflow: true,
       button: true,
-      width: '56px',
+      width: '55px',
     }
   ]
 
-  const onUpdate = (values:any) => {
-    setRecord(values)
-  }
+  const onUpdate = (values:any) => setRecord(values)
+
 
   const onSubmit = async (values: any) => {
     try{
       record ? updateMutate(values) : createMutate(values)
       setRecord(null)
     }catch (err){
-      console.debug(err)
+      //console.debug(err)
     }
   }
 
@@ -80,22 +88,38 @@ export default function Dashboard() {
             <Form
               onSubmit={onSubmit}
               initialValues={record}
-              render={({handleSubmit, values, form: {reset}})=>(
+              render={({handleSubmit, form: {restart},submitSucceeded, submitErrors,submitFailed}): any => (
                 <form onSubmit={handleSubmit} className='p-4 '>
                   <div className='mb-6 '>
                     <div className='grid grid-cols-3 gap-2 mb-4'>
-                      <TextFieldField name='name' label='Nombre'/>
+                      <TextFieldField name='name' label='Nombre' validate={mix(required())}/>
                       <TextFieldField name='components' label='Componentes'/>
-                      <AutoCompleteField name='brand_id' label='Marca' data={brands} addButtonClick={setOpenBrandModal}/>
-                      <TextFieldField name='location' label='Ubicacion'/>
+                      <TextFieldField name='location' label='Ubicacion' />
                       <TextFieldField name='digemid_code' label='Codigo DIGEMID'/>
-                      <TextFieldField name='price_out' label='Precio de compra'/>
-                      <TextFieldField name='price_in' label='Precio de venta'/>
-                      <AutoCompleteField name='laboratory_id' label='Laboratorio' data={laboratories} addButtonClick={setOpenLaboratoryModal}/>
-                      <AutoCompleteField name='category_id' label='Categoria' data={categories} addButtonClick={setOpenCategoryModal}/>
+                      <TextFieldField name='wholesale_price' label='Precio por mayor' validate={mix(required(), isNumber())}/>
+                      <TextFieldField name='retail_price' label='Precio por menor' validate={mix(required(), isNumber())}/>
+                      <AutoCompleteField name='brand_id' label='Marca' data={brands} addButtonClick={setOpenBrandModal} validate={required()}/>
+                      <AutoCompleteField name='laboratory_id' label='Laboratorio' data={laboratories} addButtonClick={setOpenLaboratoryModal} validate={required()}/>
+                      <AutoCompleteField name='category_id' label='Categoria' data={categories} addButtonClick={setOpenCategoryModal} validate={required()}/>
                     </div>
-                    <div className='flex justify-center mb-4'>
+                    <Snackbar
+                      open={submitSucceeded}
+                      autoHideDuration={3000}
+                      anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+                      onClose={restart}
+                    >
+                      <Alert severity='success'>Creado correctamente</Alert>
+                    </Snackbar>
+                    <Snackbar
+                      open={submitFailed}
+                      autoHideDuration={3000}
+                      anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+                    >
+                      <Alert severity='error'>Error al crear producto</Alert>
+                    </Snackbar>
+                    <div className='flex justify-center mb-4 gap-6'>
                       <Button label='Crear producto' type='submit' endIcon={<Add/>}/>
+                      <Button label='Cancelar'  color='warning' onClick={restart}/>
                     </div>
                   </div>
                   <DataTable
