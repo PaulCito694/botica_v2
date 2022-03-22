@@ -98,9 +98,9 @@ export default function Dashboard() {
                       <TextFieldField name='digemid_code' label='Codigo DIGEMID'/>
                       <TextFieldField name='wholesale_price' label='Precio por mayor' validate={mix(required(), isNumber())}/>
                       <TextFieldField name='retail_price' label='Precio por menor' validate={mix(required(), isNumber())}/>
-                      <AutoCompleteField name='brand_id' label='Marca' data={brands} addButtonClick={setOpenBrandModal} validate={required()}/>
+                      {/*<AutoCompleteField name='brand_id' label='Marca' data={brands} addButtonClick={setOpenBrandModal} validate={required()}/>
                       <AutoCompleteField name='laboratory_id' label='Laboratorio' data={laboratories} addButtonClick={setOpenLaboratoryModal} validate={required()}/>
-                      <AutoCompleteField name='category_id' label='Categoria' data={categories} addButtonClick={setOpenCategoryModal} validate={required()}/>
+                      <AutoCompleteField name='category_id' label='Categoria' data={categories} addButtonClick={setOpenCategoryModal} validate={required()}/>*/}
                     </div>
                     <Snackbar
                       open={submitSucceeded}
